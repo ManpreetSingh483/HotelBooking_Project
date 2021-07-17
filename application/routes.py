@@ -16,7 +16,25 @@ def Gallery():
 def services():
     return render_template('services.html')
 
+@app.route('/setContactDetials', methods=['GET', 'POST'])
+def setContactDetials():
+    db =  connect_to_monogodb()
+    print(db.list_collection_names())
+    contactDetails = db["ContactDetails"]
+    if request.method == 'POST':
+        firstname = request.form.get('firstname')
+        lastname = request.form.get('lastname')
+        Message= request.form.get('Message')
+        Email=request.form.get('Email')
+        result ='''  <h1>First Name : {}<h1>
+                              <h1>Last Name : {}<h1> 
+                              <h1>Message: {}<h1>
+                '''
 
+
+    contactDetails.insert({'firstname': firstname, 'lastname': lastname, 'Message': Message,'Email':Email})
+    message = "Contact details sent Successfully"
+    return render_template('hotelIndex.html', message=message)
 
 @app.route('/contact')
 def contact():
