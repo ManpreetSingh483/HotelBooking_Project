@@ -1,0 +1,6 @@
+Flask==2.0.1
+jinja2
+pymongo
+flask-wtf
+python-dotenv
+dnspython
